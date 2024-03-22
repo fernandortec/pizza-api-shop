@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709001941171,
+      "tag": "0000_plain_nemesis",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709002054627,
+      "tag": "0001_glamorous_jackal",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709080868645,
+      "tag": "0002_fresh_daimon_hellstrom",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1709080951971,
+      "tag": "0003_premium_thor",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1709518719351,
+      "tag": "0004_dusty_thunderbolt_ross",
+      "breakpoints": true
+    }
+  ]
+}
