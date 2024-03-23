@@ -1,7 +1,9 @@
+import type { EntityAlreadyExistsError } from "@/use-cases/errors/entity-already-exists-error";
 import type { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
 import type { ErrorHandler } from "elysia";
 
 export const errorHandler: ErrorHandler<{
+	readonly ALREADY_EXISTS: EntityAlreadyExistsError;
 	readonly UNATHORIZED: UnauthorizedError;
 }> = ({ code, error, set }) => {
 	switch (code) {

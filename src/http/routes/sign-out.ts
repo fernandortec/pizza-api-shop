@@ -1,4 +1,4 @@
-import { auth } from "@/plugins/auth";
+import { auth } from "@/http/plugins/auth";
 import { Elysia } from "elysia";
 
 export const signOut = new Elysia()

@@ -1,8 +1,6 @@
-import { DrizzleRestaurantsRepository } from "@/repositories/drizzle/drizzle-restaurants-repository";
-import { DrizzleUsersRepository } from "@/repositories/drizzle/drizzle-users-repository";
 import { createRestaurantManagerSchema } from "@/schemas/restaurant-manager-schemas";
-import { CreateRestaurantManagerUseCase } from "@/use-cases/create-restaurant-manager";
 import { EntityAlreadyExistsError } from "@/use-cases/errors/entity-already-exists-error";
+import { makeCreateRestaurantManagerUseCase } from "@/use-cases/factories/make-create-restaurant-manager-use-case";
 import { Elysia } from "elysia";
 
 export const createRestaurantManager = new Elysia()
@@ -19,13 +17,8 @@ export const createRestaurantManager = new Elysia()
 		async ({ body }) => {
 			const { email, managerName, phone, restaurantName } = body;
 
-			const usersRepository = new DrizzleUsersRepository();
-			const restaurantsRepository = new DrizzleRestaurantsRepository();
-
-			const createRestaurantManagerUseCase = new CreateRestaurantManagerUseCase(
-				usersRepository,
-				restaurantsRepository,
-			);
+			const createRestaurantManagerUseCase =
+				makeCreateRestaurantManagerUseCase();
 
 			const manager = await createRestaurantManagerUseCase.execute({
 				email,

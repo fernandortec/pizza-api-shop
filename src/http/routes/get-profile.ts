@@ -1,6 +1,6 @@
 import { db } from "@/database/connection";
 import { users } from "@/database/schemas";
-import { auth } from "@/plugins/auth";
+import { auth } from "@/http/plugins/auth";
 import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
 import { eq } from "drizzle-orm";
 import { Elysia } from "elysia";

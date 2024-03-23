@@ -1,11 +1,11 @@
 import { errorHandler } from "@/http/error-handler";
+import { auth } from "@/http/plugins/auth";
 import { authenticateFromLink } from "@/http/routes/authenticate-from-link";
 import { createRestaurantManager } from "@/http/routes/create-restaurant-manager";
 import { getManagedRestaurant } from "@/http/routes/get-managed-restaurant";
 import { getProfile } from "@/http/routes/get-profile";
 import { sendAuthLink } from "@/http/routes/send-auth-link";
 import { signOut } from "@/http/routes/sign-out";
-import { auth } from "@/plugins/auth";
 import chalk from "chalk";
 import { Elysia } from "elysia";
 

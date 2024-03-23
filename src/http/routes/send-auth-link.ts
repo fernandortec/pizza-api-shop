@@ -5,6 +5,7 @@ import { sendAuthLinkSchema } from "@/schemas/auth-links-schemas";
 import nodemailer from "nodemailer";
 
 import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
+import { makeSendAuthLinkUseCase } from "@/use-cases/factories/make-send-auth-link-use-case";
 import { SendAuthLinkUseCase } from "@/use-cases/send-auth-link";
 import { Elysia } from "elysia";
 
@@ -22,15 +23,7 @@ export const sendAuthLink = new Elysia()
 		async ({ body }) => {
 			const { email } = body;
 
-			const mailRepository = new SmtpMailsRepository(nodemailer);
-			const usersRepository = new DrizzleUsersRepository();
-			const authLinksRepository = new DrizzleAuthLinksRepository();
-
-			const sendAuthLinkUseCase = new SendAuthLinkUseCase(
-				authLinksRepository,
-				usersRepository,
-				mailRepository,
-			);
+			const sendAuthLinkUseCase = makeSendAuthLinkUseCase();
 
 			const redirectURL = await sendAuthLinkUseCase.execute({ email });
 

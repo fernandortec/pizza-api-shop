@@ -1,6 +1,6 @@
 import { db } from "@/database/connection";
 import { restaurants } from "@/database/schemas";
-import { auth } from "@/plugins/auth";
+import { auth } from "@/http/plugins/auth";
 import { eq } from "drizzle-orm";
 import { Elysia } from "elysia";
 

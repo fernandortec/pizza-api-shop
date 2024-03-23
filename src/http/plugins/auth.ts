@@ -3,7 +3,7 @@ import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
 import cookie from "@elysiajs/cookie";
 import jwt from "@elysiajs/jwt";
 import { Elysia } from "elysia";
-import { env } from "../env";
+import { env } from "../../env";
 
 export const auth = new Elysia()
 	.use(

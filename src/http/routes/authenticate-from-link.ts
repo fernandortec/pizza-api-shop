@@ -1,6 +1,6 @@
 import { db } from "@/database/connection";
 import { authLinks, restaurants } from "@/database/schemas";
-import { auth } from "@/plugins/auth";
+import { auth } from "@/http/plugins/auth";
 import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
 import { Elysia, t } from "elysia";
