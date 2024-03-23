@@ -6,12 +6,16 @@ import { createId } from "@paralleldrive/cuid2";
 export class InMemoryAuthLinksRepository implements AuthLinksRepository {
 	private authLinks: AuthLink[] = [];
 
-	async create({ code, userId }: CreateAuthLinkSchema): Promise<AuthLink> {
+	async create({
+		code,
+		userId,
+		createdAt,
+	}: CreateAuthLinkSchema): Promise<AuthLink> {
 		const authLink: AuthLink = {
 			id: createId(),
 			code: code,
 			userId: userId,
-			createdAt: new Date(),
+			createdAt: createdAt ?? new Date(),
 		};
 
 		this.authLinks.push(authLink);

@@ -1,16 +1,16 @@
-import { beforeEach, describe, expect, it } from "bun:test";
 import { InMemoryrestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
 import { CreateRestaurantManagerUseCase } from "@/use-cases/create-restaurant-manager";
-import { EntityAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
+import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
+import { beforeEach, describe, expect, it } from "bun:test";
 
 let usersRepository: UsersRepository;
 let restaurantsRepository: RestaurantsRepository;
 let sut: CreateRestaurantManagerUseCase;
 
-describe("Create restaurant manager", () => {
+describe("Create restaurant manager use case", () => {
 	beforeEach(() => {
 		usersRepository = new InMemoryUsersRepository();
 		restaurantsRepository = new InMemoryrestaurantsRepository();
@@ -49,6 +49,6 @@ describe("Create restaurant manager", () => {
 				managerName: "Manager of restaurant",
 				restaurantName: "Restaurant test",
 			}),
-		).rejects.toBeInstanceOf(EntityAlreadyExistsError);
+		).rejects.toBeInstanceOf(ResourceAlreadyExistsError);
 	});
 });

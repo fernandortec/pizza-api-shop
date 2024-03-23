@@ -10,7 +10,6 @@ import type {
 	MailsRepository,
 } from "@/repositories/mails-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
-import { EntityAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
 import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
 import { SendAuthLinkUseCase } from "@/use-cases/send-auth-link";
 

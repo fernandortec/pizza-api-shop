@@ -1,5 +1,5 @@
 export class ResourceNotFoundError extends Error {
 	constructor() {
-		super("Resource already exists!");
+		super("Resource not found");
 	}
 }
