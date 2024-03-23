@@ -1,4 +1,4 @@
-import type { EntityAlreadyExistsError } from "@/use-cases/errors/entity-already-exists-error";
+import type { EntityAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
 import type { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
 import type { ErrorHandler } from "elysia";
 

@@ -1,6 +1,6 @@
+import { db } from "@/database/connection";
+import { restaurants, users } from "@/database/schemas";
 import { faker } from "@faker-js/faker";
-import { db } from "./connection";
-import { restaurants, users } from "./schemas";
 
 import chalk from "chalk";
 

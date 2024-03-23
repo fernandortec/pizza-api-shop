@@ -19,7 +19,7 @@ export class DrizzleAuthLinksRepository implements AuthLinksRepository {
 		return authLink ?? null;
 	}
 
-	async delete(id: string): Promise<void> {
-		await db.delete(authLinks).where(eq(authLinks.id, id));
+	async delete(code: string): Promise<void> {
+		await db.delete(authLinks).where(eq(authLinks.code, code));
 	}
 }

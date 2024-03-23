@@ -1,5 +1,5 @@
 import { createRestaurantManagerSchema } from "@/schemas/restaurant-manager-schemas";
-import { EntityAlreadyExistsError } from "@/use-cases/errors/entity-already-exists-error";
+import { EntityAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
 import { makeCreateRestaurantManagerUseCase } from "@/use-cases/factories/make-create-restaurant-manager-use-case";
 import { Elysia } from "elysia";
 

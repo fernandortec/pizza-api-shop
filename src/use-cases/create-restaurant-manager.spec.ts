@@ -4,7 +4,7 @@ import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-user
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
 import { CreateRestaurantManagerUseCase } from "@/use-cases/create-restaurant-manager";
-import { EntityAlreadyExistsError } from "@/use-cases/errors/entity-already-exists-error";
+import { EntityAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
 
 let usersRepository: UsersRepository;
 let restaurantsRepository: RestaurantsRepository;
@@ -32,7 +32,7 @@ describe("Create restaurant manager", () => {
 		expect(manager.id).toEqual(expect.any(String));
 	});
 
-  //TODO- add tests to link iff recently created manager and restaurant are linked
+	//TODO- add tests to link iff recently created manager and restaurant are linked
 
 	it("should not be able to registe with same email twice", async () => {
 		await sut.execute({

@@ -26,9 +26,9 @@ export class InMemoryAuthLinksRepository implements AuthLinksRepository {
 		return authLink;
 	}
 
-	async delete(id: string): Promise<void> {
+	async delete(code: string): Promise<void> {
 		this.authLinks.splice(
-			this.authLinks.findIndex((authLink) => authLink.id),
+			this.authLinks.findIndex((authLink) => authLink.code === code),
 			1,
 		);
 	}
