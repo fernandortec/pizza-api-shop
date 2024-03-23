@@ -1,10 +1,10 @@
 import { createRestaurantManagerSchema } from "@/schemas/restaurant-manager-schemas";
-import { EntityAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
+import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
 import { makeCreateRestaurantManagerUseCase } from "@/use-cases/factories/make-create-restaurant-manager-use-case";
 import { Elysia } from "elysia";
 
 export const createRestaurantManager = new Elysia()
-	.error({ ALREADY_EXISTS: EntityAlreadyExistsError })
+	.error({ ALREADY_EXISTS: ResourceAlreadyExistsError })
 	.onError(({ set, code }) => {
 		switch (code) {
 			case "ALREADY_EXISTS":

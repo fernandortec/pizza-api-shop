@@ -18,7 +18,10 @@ export class AuthFromLinkUseCase {
 		code,
 	}: AuthFromLinkSchema): Promise<AuthFromLinkUseCaseResponse> {
 		const authLink = await this.authLinksRepository.findByCode(code);
-		if (!authLink) throw new ResourceNotFoundError();
+
+		if (!authLink) {
+			throw new ResourceNotFoundError();
+		}
 
 		const daysSinceAuthLinkWasCreated = dayjs().diff(
 			authLink.createdAt,
