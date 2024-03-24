@@ -7,13 +7,6 @@ import { Elysia } from "elysia";
 export const authenticateFromLink = new Elysia()
 	.use(auth)
 	.error({ NOT_FOUND: ResourceNotFoundError })
-	.onError(({ set, code }) => {
-		switch (code) {
-			case "NOT_FOUND":
-				set.status = 404;
-				return { message: "Auth link not found" };
-		}
-	})
 	.get(
 		"/auth-links/authenticate",
 		async ({ query, set, signUser }) => {
@@ -32,5 +25,12 @@ export const authenticateFromLink = new Elysia()
 		},
 		{
 			query: authFromLinkSchema,
+			error: ({ code, set }) => {
+				switch (code) {
+					case "NOT_FOUND":
+						set.status = 404;
+						return { message: "Auth link not found" };
+				}
+			},
 		},
 	);

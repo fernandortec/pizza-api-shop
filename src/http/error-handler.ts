@@ -6,6 +6,7 @@ import type { ErrorHandler } from "elysia";
 export const errorHandler: ErrorHandler<{
 	readonly ALREADY_EXISTS: ResourceAlreadyExistsError;
 	readonly UNAUTHORIZED: UnauthorizedError;
+	readonly NOT_FOUND: ResourceNotFoundError;
 }> = ({ code, error, set }) => {
 	switch (code) {
 		case "VALIDATION": {

@@ -31,11 +31,10 @@ export const auth = new Elysia()
 
 			getCurrentUser: async () => {
 				const payload = await verify(cookie.auth);
-				if (!payload) throw new UnauthorizedError();
 
 				return {
-					userId: payload.sub,
-					restaurantId: payload.restaurantId,
+					userId: payload ? payload.sub : null,
+					restaurantId: payload ? payload.restaurantId : null,
 				};
 			},
 		};

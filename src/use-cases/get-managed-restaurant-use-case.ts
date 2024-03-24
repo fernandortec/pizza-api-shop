@@ -5,7 +5,9 @@ import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-err
 export class GetManagedRestaurantuseCase {
 	constructor(private restaurantsRepository: RestaurantsRepository) {}
 
-	async execute(restaurantId: string): Promise<Restaurant> {
+	async execute(restaurantId?: string | null): Promise<Restaurant> {
+		if (!restaurantId) throw new ResourceNotFoundError();
+
 		const restaurant = await this.restaurantsRepository.findById(restaurantId);
 		if (!restaurant) throw new ResourceNotFoundError();
 

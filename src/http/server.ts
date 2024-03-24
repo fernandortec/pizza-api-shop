@@ -17,7 +17,7 @@ const app = new Elysia()
 	.use(signOut)
 	.use(getProfile)
 	.use(getManagedRestaurant)
-	.onError(errorHandler);
+	// .onError(errorHandler);
 
 app.listen(3333, () => {
 	console.log(chalk.green.bold("HTTP server running: ✔"));

@@ -1,22 +1,30 @@
-import { db } from "@/database/connection";
-import { restaurants } from "@/database/schemas";
 import { auth } from "@/http/plugins/auth";
-import { eq } from "drizzle-orm";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
+import { makeGetManagedRestaurantUseCase } from "@/use-cases/factories/make-get-managed-restaurant-use-case";
 import { Elysia } from "elysia";
 
 export const getManagedRestaurant = new Elysia()
 	.use(auth)
-	.get("/managed-restaurant", async ({ getCurrentUser }) => {
-		const { restaurantId } = await getCurrentUser();
+	.error({ NOT_FOUND: ResourceNotFoundError })
+	.get(
+		"/managed-restaurant",
+		async ({ getCurrentUser }) => {
+			const { restaurantId } = await getCurrentUser();
 
-		if (!restaurantId) {
-			throw new Error("User is not a manager");
-		}
+			const getManagedRestaurantUseCase = makeGetManagedRestaurantUseCase();
 
-		const [managedRestaurant] = await db
-			.select()
-			.from(restaurants)
-			.where(eq(restaurants.id, restaurantId));
+			const managedRestaurant =
+				getManagedRestaurantUseCase.execute(restaurantId);
 
-		return managedRestaurant;
-	});
+			return managedRestaurant;
+		},
+		{
+			error: ({ set, code }) => {
+				switch (code) {
+					case "NOT_FOUND":
+						set.status = 409;
+						return { message: "Manager already exists!" };
+				}
+			},
+		},
+	);

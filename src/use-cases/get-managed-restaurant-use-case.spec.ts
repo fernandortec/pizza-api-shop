@@ -37,9 +37,15 @@ describe("Get managed restaurant user", () => {
 		expect(restaurantById?.id).toEqual(expect.any(String));
 	});
 
-	it("should throw if restaurant isn't set", async () => {
+	it("should throw if restaurant id doesn't belong to an actual restaurant", async () => {
 		expect(sut.execute("some-fakeid")).rejects.toBeInstanceOf(
 			ResourceNotFoundError,
 		);
 	});
+
+		it("should throw if restaurantId is not send as a parameter", async () => {
+			expect(sut.execute()).rejects.toBeInstanceOf(
+				ResourceNotFoundError,
+			);
+		});
 });

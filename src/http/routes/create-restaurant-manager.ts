@@ -5,13 +5,6 @@ import { Elysia } from "elysia";
 
 export const createRestaurantManager = new Elysia()
 	.error({ ALREADY_EXISTS: ResourceAlreadyExistsError })
-	.onError(({ set, code }) => {
-		switch (code) {
-			case "ALREADY_EXISTS":
-				set.status = 409;
-				return { message: "Manager already exists!" };
-		}
-	})
 	.post(
 		"/account",
 		async ({ body }) => {
@@ -29,5 +22,14 @@ export const createRestaurantManager = new Elysia()
 
 			return manager;
 		},
-		{ body: createRestaurantManagerSchema },
+		{
+			body: createRestaurantManagerSchema,
+			error: ({ code, set }) => {
+				switch (code) {
+					case "ALREADY_EXISTS":
+						set.status = 409;
+						return { message: "Manager already exists!" };
+				}
+			},
+		},
 	);
