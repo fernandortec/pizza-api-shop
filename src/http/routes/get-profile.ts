@@ -1,18 +1,30 @@
-import { db } from "@/database/connection";
-import { users } from "@/database/schemas";
 import { auth } from "@/http/plugins/auth";
-import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
-import { eq } from "drizzle-orm";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
+import { makeGetProfileUseCase } from "@/use-cases/factories/make-get-profile-use-case";
 import { Elysia } from "elysia";
+import { set } from "zod";
 
 export const getProfile = new Elysia()
 	.use(auth)
-	.get("/me", async ({ getCurrentUser }) => {
-		const { userId } = await getCurrentUser();
+	.error({ NOT_FOUND: ResourceNotFoundError })
+	.get(
+		"/me",
+		async ({ getCurrentUser }) => {
+			const { userId } = await getCurrentUser();
 
-		const [user] = await db.select().from(users).where(eq(users.id, userId));
+			const getProfileUseCase = makeGetProfileUseCase();
 
-		if (!user) throw new UnauthorizedError();
+			const user = await getProfileUseCase.execute(userId);
 
-		return user;
-	});
+			return user;
+		},
+		{
+			error: ({ code, set }) => {
+				switch (code) {
+					case "NOT_FOUND":
+						set.status = 404;
+						return { message: "Profile not found" };
+				}
+			},
+		},
+	);

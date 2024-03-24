@@ -10,7 +10,7 @@ let restaurantsRepository: RestaurantsRepository;
 let usersRepository: UsersRepository;
 let sut: GetManagedRestaurantuseCase;
 
-describe("Get managed restaurant user", () => {
+describe("Get managed restaurant use case", () => {
 	beforeEach(() => {
 		restaurantsRepository = new InMemoryRestaurantsRepository();
 		usersRepository = new InMemoryUsersRepository();
