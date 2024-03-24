@@ -3,7 +3,7 @@ import type { RestaurantsRepository } from "@/repositories/restaurants-repositor
 import type { CreateRestaurantSchema } from "@/schemas/restaurant-schemas";
 import { createId } from "@paralleldrive/cuid2";
 
-export class InMemoryrestaurantsRepository implements RestaurantsRepository {
+export class InMemoryRestaurantsRepository implements RestaurantsRepository {
 	private restaurants: Restaurant[] = [];
 
 	async create({

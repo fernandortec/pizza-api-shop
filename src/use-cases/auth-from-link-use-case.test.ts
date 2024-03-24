@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from "bun:test";
 import { randomUUID } from "node:crypto";
 import type { AuthLinksRepository } from "@/repositories/auth-links-repository";
 import { InMemoryAuthLinksRepository } from "@/repositories/in-memory/in-memory-auth-links-repository";
-import { InMemoryrestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
@@ -17,7 +17,7 @@ let sut: AuthFromLinkUseCase;
 
 describe("Auth from link use case", () => {
 	beforeEach(() => {
-		restaurantsRepository = new InMemoryrestaurantsRepository();
+		restaurantsRepository = new InMemoryRestaurantsRepository();
 		authLinksRepository = new InMemoryAuthLinksRepository();
 		usersRepository = new InMemoryUsersRepository();
 
@@ -111,6 +111,6 @@ describe("Auth from link use case", () => {
 			redirect: "https://fake-url.com",
 		});
 
-		expect(authData.restaurantId).toBeUndefined()
+		expect(authData.restaurantId).toBeUndefined();
 	});
 });
