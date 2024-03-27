@@ -1,7 +1,8 @@
+import { orders } from "@/database/schemas";
 import { createId } from "@paralleldrive/cuid2";
-import { relations, type InferSelectModel } from "drizzle-orm";
+import { type InferSelectModel, relations } from "drizzle-orm";
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { users, type User } from "./users";
+import { type User, users } from "./users";
 
 export const restaurants = pgTable("restaurants", {
 	id: text("id")
@@ -16,17 +17,17 @@ export const restaurants = pgTable("restaurants", {
 	updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-export const restaurantsRelations = relations(restaurants, ({ one }) => {
+export const restaurantsRelations = relations(restaurants, ({ one, many }) => {
 	return {
 		manager: one(users, {
 			fields: [restaurants.managerId],
 			references: [users.id],
 			relationName: "restaurant_manager",
 		}),
+		orders: many(orders),
+		products: many(orders),
 	};
 });
-
-
 
 export type Restaurant = InferSelectModel<typeof restaurants>;
 export type RestaurantAndManager = Restaurant & { manager: User };
