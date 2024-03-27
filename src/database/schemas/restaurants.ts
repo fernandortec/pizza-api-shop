@@ -26,5 +26,7 @@ export const restaurantsRelations = relations(restaurants, ({ one }) => {
 	};
 });
 
+
+
 export type Restaurant = InferSelectModel<typeof restaurants>;
 export type RestaurantAndManager = Restaurant & { manager: User };
