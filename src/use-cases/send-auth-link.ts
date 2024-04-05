@@ -20,6 +20,8 @@ export class SendAuthLinkUseCase {
 
 		const authCode = createId();
 
+		console.log(authCode)
+
 		await this.authLinksRepository.create({
 			code: authCode,
 			userId: doesUserExists.id,

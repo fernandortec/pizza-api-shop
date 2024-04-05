@@ -2,7 +2,6 @@ import { auth } from "@/http/plugins/auth";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { makeGetProfileUseCase } from "@/use-cases/factories/make-get-profile-use-case";
 import { Elysia } from "elysia";
-import { set } from "zod";
 
 export const getProfile = new Elysia()
 	.use(auth)

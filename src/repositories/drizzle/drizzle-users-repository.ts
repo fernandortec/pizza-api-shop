@@ -16,7 +16,7 @@ export class DrizzleUsersRepository implements UsersRepository {
 
 	async findById(id: string): Promise<User | null> {
 		const [user] = await db.select().from(users).where(eq(users.id, id));
-
+		
 		return user ?? null;
 	}
 

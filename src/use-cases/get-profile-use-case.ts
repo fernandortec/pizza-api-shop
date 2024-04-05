@@ -7,7 +7,6 @@ export class GetProfileUseCase {
 
 	async execute(userId?: string | null): Promise<User | null> {
 		if (!userId) throw new ResourceNotFoundError();
-
 		const user = await this.usersRepository.findById(userId);
 		if (!user) throw new ResourceNotFoundError();
 
