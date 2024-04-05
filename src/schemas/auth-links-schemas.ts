@@ -9,7 +9,7 @@ export const createAuthLinkSchema = t.Object({
 export type CreateAuthLinkSchema = Static<typeof createAuthLinkSchema>;
 
 export const sendAuthLinkSchema = t.Object({
-	email: t.String({ format: "email", default: "email@fake.com" }),
+	email: t.String({ format: "email", default: "fake@email.com" }),
 });
 
 export type SendAuthLinkSchema = Static<typeof sendAuthLinkSchema>;

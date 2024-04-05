@@ -6,7 +6,8 @@ import { Elysia } from "elysia";
 
 export const sendAuthLink = new Elysia()
 	.error({ UNAUTHORIZED: UnauthorizedError })
-	.onError(({ set, code }) => {
+	.onError(({ error,set, code }) => {
+		console.log(error)
 		switch (code) {
 			case "UNAUTHORIZED":
 				set.status = 401;

@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import type { InferSelectModel } from "drizzle-orm";
+import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { users } from ".";
 
@@ -15,3 +15,4 @@ export const authLinks = pgTable("auth_links", {
 });
 
 export type AuthLink = InferSelectModel<typeof authLinks>;
+export type CreateAuthLink = InferInsertModel<typeof authLinks>;
