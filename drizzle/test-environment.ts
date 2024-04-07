@@ -6,6 +6,7 @@ import { randomUUID } from "node:crypto";
 import postgres from "postgres";
 
 import { afterAll, beforeAll } from "bun:test";
+import { $ } from "bun";
 
 if (process.env.IS_TEST_E2E) {
 	if (!process.env.DATABASE_URL) {
@@ -16,16 +17,13 @@ if (process.env.IS_TEST_E2E) {
 
 	beforeAll(async () => {
 		const connection = postgres(String(process.env.DATABASE_URL), {});
-		const db = drizzle(connection);
-
-		await db.execute(sql.raw(`CREATE SCHEMA IF NOT EXISTS "${schema}";`));
 
 		const databaseURL = new URL(String(process.env.DATABASE_URL));
 		databaseURL.searchParams.set("search_path", schema);
 
-		process.env.DATABASE_URL = databaseURL.toString()
+		process.env.DATABASE_URL = databaseURL.toString();
 
-		execSync("bun drizzle-kit push:pg");
+		await $`DB_SCHEMA=${schema} bun migrate`;
 	});
 
 	afterAll(() => {
