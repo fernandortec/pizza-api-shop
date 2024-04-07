@@ -5,6 +5,12 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { randomUUID } from "node:crypto";
 import postgres from "postgres";
 
+if (!process.env.IS_TEST_E2E) {
+	console.log('thats not a e2e test rigt')
+} else {
+	console.log('that sure is')
+}
+
 const generateDatabaseUrl = (schema: string): string => {
 	if (!process.env.DATABASE_URL) {
 		throw new Error("Please provide a DATABASE_URL environment variable.");

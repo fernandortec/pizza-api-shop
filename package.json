@@ -3,9 +3,11 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --bun --watch src/http/server.ts",
+    "dev": "bun --watch src/http/server.ts",
     "build": "bun build src/http/server.ts",
     "start": "NODE_ENV=production bun src/http/server.ts",
+    "test": "bun test ./src/use-cases/*.spec.ts",
+    "test:e2e":  "IS_TEST_E2E=yes bun test ./src/http/*.spec.ts",
     "generate": "drizzle-kit generate:pg",
     "studio": "drizzle-kit studio",
     "migrate": "bun src/database/migrate.ts",
