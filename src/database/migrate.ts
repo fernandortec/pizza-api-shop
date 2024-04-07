@@ -14,6 +14,6 @@ await migrate(db, { migrationsFolder: "drizzle" });
 
 console.log(chalk.greenBright("Migrations applied successfully!"));
 
-await connection.end();
+// await connection.end();
 
 process.exit();
