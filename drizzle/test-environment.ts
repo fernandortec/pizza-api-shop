@@ -1,12 +1,10 @@
-import { sql } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/postgres-js";
-
-import { execSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import postgres from "postgres";
 
 import { afterAll, beforeAll } from "bun:test";
-import { $ } from "bun";
+import { sql } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { migrate } from "drizzle-orm/postgres-js/migrator";
+import postgres from "postgres";
 
 if (process.env.IS_TEST_E2E) {
 	if (!process.env.DATABASE_URL) {
@@ -14,36 +12,23 @@ if (process.env.IS_TEST_E2E) {
 	}
 
 	const schema = randomUUID();
+	const databaseURL = new URL(String(process.env.DATABASE_URL));
+	databaseURL.searchParams.set("search_path", schema);
+
+	process.env.DATABASE_URL = databaseURL.toString();
+
+	const connection = postgres(String(process.env.DATABASE_URL), { max: 1 });
+	const db = drizzle(connection);
 
 	beforeAll(async () => {
-		const connection = postgres(String(process.env.DATABASE_URL), {});
-
-		const databaseURL = new URL(String(process.env.DATABASE_URL));
-		databaseURL.searchParams.set("search_path", schema);
-
-		process.env.DATABASE_URL = databaseURL.toString();
-
-		await $`DB_SCHEMA=${schema} bun migrate`;
+		await migrate(db, {
+			migrationsFolder: "drizzle",
+			migrationsSchema: schema,
+		});
 	});
 
-	afterAll(() => {
-		// global teardown
+	afterAll(async () => {
+		await db.execute(sql.raw(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`));
+		await connection.end();
 	});
-	// if (!process.env.DATABASE_URL) {
-	// 	throw new Error("Please provide a DATABASE_URL environment variable.");
-	// }
-
-	// const schema = randomUUID();
-
-	// const connection = postgres(process.env.DATABASE_URL, {});
-	// const db = drizzle(connection);
-
-	// await db.execute(sql`CREATE SCHEMA IF NOT EXISTS ${schema};`);
-
-	// process.env.DATABASE_URL = databaseURL.toString();
-
-	// console.log(databaseURL);
-
-	// await db.execute(sql`DROP SCHEMA IF EXISTS "${schema}" CASCADE`);
-	// await connection.end();
 }
