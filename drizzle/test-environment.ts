@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 
-import { afterAll, beforeAll } from "bun:test";
+import { afterEach, beforeEach } from "bun:test";
 import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
@@ -17,18 +17,21 @@ if (process.env.IS_TEST_E2E) {
 
 	process.env.DATABASE_URL = databaseURL.toString();
 
-	const connection = postgres(String(process.env.DATABASE_URL), { max: 1 });
+	const connection = postgres(String(process.env.DATABASE_URL), {
+		max: 1,
+		max_lifetime: 10,
+	});
+
 	const db = drizzle(connection);
 
-	beforeAll(async () => {
+	beforeEach(async () => {
 		await migrate(db, {
 			migrationsFolder: "drizzle",
 			migrationsSchema: schema,
 		});
 	});
 
-	afterAll(async () => {
+	afterEach(async () => {
 		await db.execute(sql.raw(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`));
-		await connection.end();
 	});
 }

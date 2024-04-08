@@ -6,13 +6,11 @@ import { Elysia } from "elysia";
 
 export const sendAuthLink = new Elysia()
 	.error({ UNAUTHORIZED: UnauthorizedError })
-	.onError(({ error,set, code }) => {
-		console.log(error)
+	.onError(({ set, code }) => {
 		switch (code) {
 			case "UNAUTHORIZED":
 				set.status = 401;
 				return { message: "Unauthorized, use a vaild email" };
-			default:
 		}
 	})
 	.post(
