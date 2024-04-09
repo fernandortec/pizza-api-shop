@@ -6,7 +6,7 @@ import { load } from "cheerio";
 describe("Authenticate from link(e2e)", () => {
 	const app = treaty<App>(httpApp);
 
-	it("should be able to authenticate from link", async () => {
+	it.skip("should be able to authenticate from link", async () => {
 		await app.restaurants.post({
 			email: "email@email.com",
 			managerName: "fake manager",

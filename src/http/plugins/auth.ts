@@ -5,6 +5,7 @@ import { jwt } from "@elysiajs/jwt";
 import { Elysia } from "elysia";
 
 interface AuthDerivedMethods extends Record<string, unknown> {
+	readonly signOut: () => void;
 	readonly signUser: (payload: JwtSchema) => Promise<string>;
 	readonly getCurrentUser: () => Promise<GetCurrentUserResponse>;
 }
@@ -25,7 +26,12 @@ export const auth = new Elysia()
 	.use(cookie({}))
 	.derive(
 		{ as: "global" },
-		({ jwt: { sign, verify }, headers, setCookie }): AuthDerivedMethods => ({
+		({
+			jwt: { sign, verify },
+			headers,
+			setCookie,
+			removeCookie,
+		}): AuthDerivedMethods => ({
 			signUser: async (payload: JwtSchema): Promise<string> => {
 				const token = await sign(payload);
 
@@ -38,8 +44,12 @@ export const auth = new Elysia()
 				return token;
 			},
 
+			signOut: (): void => {
+				removeCookie("auth");
+			},
+
 			getCurrentUser: async (): Promise<GetCurrentUserResponse> => {
-				const payload = await verify(headers.Authorization);
+				const payload = await verify(headers.authorization || headers.Authorization);
 
 				return {
 					userId: payload ? payload.sub : null,
