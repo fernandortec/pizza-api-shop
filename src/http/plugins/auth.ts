@@ -20,7 +20,7 @@ export const auth = new Elysia()
 			return {
 				signUser: async (payload: JwtSchema) => {
 					const token = await sign(payload);
-					console.log(token)
+
 					setCookie("auth", token, {
 						httpOnly: true,
 						maxAge: 60 * 60 * 24 * 7, // 7 days,

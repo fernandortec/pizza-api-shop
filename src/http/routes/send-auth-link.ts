@@ -14,7 +14,7 @@ export const sendAuthLink = new Elysia()
 		}
 	})
 	.post(
-		"/authenticate",
+		"/auth-links/authenticate",
 		async ({ body }) => {
 			const { email } = body;
 

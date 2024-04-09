@@ -7,7 +7,7 @@ export const getManagedRestaurant = new Elysia()
 	.use(auth)
 	.error({ NOT_FOUND: ResourceNotFoundError })
 	.get(
-		"/managed-restaurant",
+		"/restaurants",
 		async ({ getCurrentUser }) => {
 			const { restaurantId } = await getCurrentUser();
 
@@ -23,7 +23,7 @@ export const getManagedRestaurant = new Elysia()
 				switch (code) {
 					case "NOT_FOUND":
 						set.status = 409;
-						return { message: "Manager already exists!" };
+						return { message: "Manager doesn't exists!" };
 				}
 			},
 		},

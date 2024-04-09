@@ -7,7 +7,6 @@ export class GetManagedRestaurantuseCase {
 
 	async execute(restaurantId?: string | null): Promise<Restaurant> {
 		if (!restaurantId) throw new ResourceNotFoundError();
-
 		const restaurant = await this.restaurantsRepository.findById(restaurantId);
 		if (!restaurant) throw new ResourceNotFoundError();
 
