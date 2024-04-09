@@ -16,12 +16,14 @@ export const authenticateFromLink = new Elysia()
 
 			const userData = await authLinkUseCase.execute({ code, redirect });
 
-			await signUser({
+			const token = await signUser({
 				sub: userData.userId,
 				restaurantId: userData?.restaurantId,
 			});
 
 			set.redirect = redirect;
+
+			return token;
 		},
 		{
 			query: authFromLinkSchema,
