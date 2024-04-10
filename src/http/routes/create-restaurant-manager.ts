@@ -1,6 +1,6 @@
 import { CreateRestaurantAndManagerSchema } from "@/schemas/restaurant-manager-schemas";
-import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
-import { makeCreateRestaurantAndManagerUseCase } from "@/use-cases/factories/make-create-restaurant-manager-use-case";
+import { ResourceAlreadyExistsError } from "@/use-cases/_errors/resource-already-exists";
+import { makeCreateRestaurantAndManagerUseCase } from "@/use-cases/_factories/make-create-restaurant-manager-use-case";
 import { Elysia } from "elysia";
 
 export const CreateRestaurantAndManager = new Elysia()

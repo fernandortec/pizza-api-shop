@@ -1,7 +1,7 @@
 import type { AuthLinksRepository } from "@/repositories/auth-links-repository";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { AuthFromLinkSchema } from "@/schemas/auth-links-schemas";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
 import dayjs from "dayjs";
 
 interface AuthFromLinkUseCaseResponse {

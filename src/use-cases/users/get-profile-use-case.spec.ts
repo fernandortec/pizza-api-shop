@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "bun:test";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
 import { GetProfileUseCase } from "@/use-cases/users/get-profile-use-case";
 
 let usersRepository: UsersRepository;

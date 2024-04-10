@@ -1,5 +1,5 @@
 import { auth } from "@/http/plugins/auth";
-import { makeGetOrderDetailsUseCase } from "@/use-cases/factories/make-get-order-details-use-case";
+import { makeGetOrderDetailsUseCase } from "@/use-cases/_factories/make-get-order-details-use-case";
 import Elysia, { t } from "elysia";
 
 export const getOrderDetails = new Elysia().get(

@@ -3,7 +3,7 @@ import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memor
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
 import { GetManagedRestaurantuseCase } from "@/use-cases/restaurants/get-managed-restaurant-use-case";
 
 let restaurantsRepository: RestaurantsRepository;

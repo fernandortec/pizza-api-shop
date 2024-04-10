@@ -1,7 +1,7 @@
 import { auth } from "@/http/plugins/auth";
 import { authFromLinkSchema } from "@/schemas/auth-links-schemas";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeAuthFromLinkUseCase } from "@/use-cases/factories/make-auth-from-link-use-case";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
+import { makeAuthFromLinkUseCase } from "@/use-cases/_factories/make-auth-from-link-use-case";
 import { Elysia } from "elysia";
 
 export const authenticateFromLink = new Elysia()

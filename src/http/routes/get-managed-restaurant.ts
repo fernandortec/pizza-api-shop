@@ -1,6 +1,6 @@
 import { auth } from "@/http/plugins/auth";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeGetManagedRestaurantUseCase } from "@/use-cases/factories/make-get-managed-restaurant-use-case";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
+import { makeGetManagedRestaurantUseCase } from "@/use-cases/_factories/make-get-managed-restaurant-use-case";
 import { Elysia } from "elysia";
 
 export const getManagedRestaurant = new Elysia()

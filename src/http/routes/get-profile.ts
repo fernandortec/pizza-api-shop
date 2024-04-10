@@ -1,6 +1,6 @@
 import { auth } from "@/http/plugins/auth";
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { makeGetProfileUseCase } from "@/use-cases/factories/make-get-profile-use-case";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
+import { makeGetProfileUseCase } from "@/use-cases/_factories/make-get-profile-use-case";
 import { Elysia } from "elysia";
 
 export const getProfile = new Elysia()

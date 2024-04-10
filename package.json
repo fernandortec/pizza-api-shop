@@ -6,7 +6,7 @@
     "dev": "bun --watch src/http/server.ts",
     "build": "bun build src/http/server.ts",
     "start": "bun src/http/server.ts",
-    "test": "bun test ./src/use-cases/*.spec.ts",
+    "test": "bun test ./src/use-cases/**/*.spec.ts",
     "test:e2e": "IS_TEST_E2E=yes bun test --timeout 10000 ./src/http/**/*.spec.ts",
     "generate": "drizzle-kit generate:pg",
     "studio": "drizzle-kit studio",

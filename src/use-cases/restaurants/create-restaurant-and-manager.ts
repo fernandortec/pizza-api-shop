@@ -2,7 +2,7 @@ import { type User } from "@/database/schemas";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
 import type { CreateRestaurantAndManagerSchema } from "@/schemas/restaurant-manager-schemas";
-import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
+import { ResourceAlreadyExistsError } from "@/use-cases/_errors/resource-already-exists";
 
 export class CreateRestaurantAndManagerUseCase {
 	constructor(

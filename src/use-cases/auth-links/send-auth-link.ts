@@ -4,7 +4,7 @@ import type { MailsRepository } from "@/repositories/mails-repository";
 
 import type { UsersRepository } from "@/repositories/users-repository";
 import type { SendAuthLinkSchema } from "@/schemas/auth-links-schemas";
-import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
+import { UnauthorizedError } from "@/use-cases/_errors/unauthorized-error";
 import { createId } from "@paralleldrive/cuid2";
 
 export class SendAuthLinkUseCase {
@@ -20,7 +20,7 @@ export class SendAuthLinkUseCase {
 
 		const authCode = createId();
 
-		console.log(authCode)
+		console.log(authCode);
 
 		await this.authLinksRepository.create({
 			code: authCode,

@@ -3,14 +3,14 @@ import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memor
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
-import { CreateRestaurantAndManagerUseCase } from "@/use-cases/create-restaurant-and-manager";
-import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
+import { ResourceAlreadyExistsError } from "@/use-cases/_errors/resource-already-exists";
+import { CreateRestaurantAndManagerUseCase } from "@/use-cases/restaurants/create-restaurant-and-manager";
 
 let usersRepository: UsersRepository;
 let restaurantsRepository: RestaurantsRepository;
 let sut: CreateRestaurantAndManagerUseCase;
 
-describe("Create restaurant manager use case", () => {
+describe("Create restaurant and manager use case", () => {
 	beforeEach(() => {
 		usersRepository = new InMemoryUsersRepository();
 		restaurantsRepository = new InMemoryRestaurantsRepository();

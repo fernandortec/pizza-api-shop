@@ -1,7 +1,7 @@
 import { sendAuthLinkSchema } from "@/schemas/auth-links-schemas";
 
-import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
-import { makeSendAuthLinkUseCase } from "@/use-cases/factories/make-send-auth-link-use-case";
+import { UnauthorizedError } from "@/use-cases/_errors/unauthorized-error";
+import { makeSendAuthLinkUseCase } from "@/use-cases/_factories/make-send-auth-link-use-case";
 import { Elysia } from "elysia";
 
 export const sendAuthLink = new Elysia()
