@@ -11,6 +11,7 @@ const envSchema = t.Object(
 			t.Literal("development"),
 			t.Literal("production"),
 			t.Literal("test"),
+			t.Literal("qa"),
 		]),
 	},
 	{ additionalProperties: true },
