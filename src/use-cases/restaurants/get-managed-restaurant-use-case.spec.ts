@@ -4,7 +4,7 @@ import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-user
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { GetManagedRestaurantuseCase } from "@/use-cases/get-managed-restaurant-use-case";
+import { GetManagedRestaurantuseCase } from "@/use-cases/restaurants/get-managed-restaurant-use-case";
 
 let restaurantsRepository: RestaurantsRepository;
 let usersRepository: UsersRepository;
@@ -43,9 +43,7 @@ describe("Get managed restaurant use case", () => {
 		);
 	});
 
-		it("should throw if restaurantId is not send as a parameter", async () => {
-			expect(sut.execute()).rejects.toBeInstanceOf(
-				ResourceNotFoundError,
-			);
-		});
+	it("should throw if restaurantId is not send as a parameter", async () => {
+		expect(sut.execute()).rejects.toBeInstanceOf(ResourceNotFoundError);
+	});
 });

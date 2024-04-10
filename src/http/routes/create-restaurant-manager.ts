@@ -1,19 +1,19 @@
-import { createRestaurantManagerSchema } from "@/schemas/restaurant-manager-schemas";
+import { CreateRestaurantAndManagerSchema } from "@/schemas/restaurant-manager-schemas";
 import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
-import { makeCreateRestaurantManagerUseCase } from "@/use-cases/factories/make-create-restaurant-manager-use-case";
+import { makeCreateRestaurantAndManagerUseCase } from "@/use-cases/factories/make-create-restaurant-manager-use-case";
 import { Elysia } from "elysia";
 
-export const createRestaurantManager = new Elysia()
+export const CreateRestaurantAndManager = new Elysia()
 	.error({ ALREADY_EXISTS: ResourceAlreadyExistsError })
 	.post(
 		"/restaurants",
 		async ({ body }) => {
 			const { email, managerName, phone, restaurantName } = body;
 
-			const createRestaurantManagerUseCase =
-				makeCreateRestaurantManagerUseCase();
+			const CreateRestaurantAndManagerUseCase =
+				makeCreateRestaurantAndManagerUseCase();
 
-			const manager = await createRestaurantManagerUseCase.execute({
+			const manager = await CreateRestaurantAndManagerUseCase.execute({
 				email,
 				managerName,
 				phone,
@@ -23,7 +23,7 @@ export const createRestaurantManager = new Elysia()
 			return manager;
 		},
 		{
-			body: createRestaurantManagerSchema,
+			body: CreateRestaurantAndManagerSchema,
 			error: ({ code, set }) => {
 				switch (code) {
 					case "ALREADY_EXISTS":

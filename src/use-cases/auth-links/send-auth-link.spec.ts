@@ -10,8 +10,8 @@ import type {
 	MailsRepository,
 } from "@/repositories/mails-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
+import { SendAuthLinkUseCase } from "@/use-cases/auth-links/send-auth-link";
 import { UnauthorizedError } from "@/use-cases/errors/unauthorized-error";
-import { SendAuthLinkUseCase } from "@/use-cases/send-auth-link";
 
 describe("Send auth link use case", () => {
 	let usersRepository: UsersRepository;

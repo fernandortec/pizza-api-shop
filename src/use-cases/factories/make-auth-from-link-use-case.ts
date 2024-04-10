@@ -1,6 +1,6 @@
 import { DrizzleAuthLinksRepository } from "@/repositories/drizzle/drizzle-auth-links-repository";
 import { DrizzleRestaurantsRepository } from "@/repositories/drizzle/drizzle-restaurants-repository";
-import { AuthFromLinkUseCase } from "@/use-cases/auth-from-link-use-case";
+import { AuthFromLinkUseCase } from "@/use-cases/auth-links/auth-from-link-use-case";
 
 export function makeAuthFromLinkUseCase() {
 	const restaurantsRepository = new DrizzleRestaurantsRepository();

@@ -1,11 +1,10 @@
 import { type User } from "@/database/schemas";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
-import type { CreateRestaurantManagerSchema } from "@/schemas/restaurant-manager-schemas";
+import type { CreateRestaurantAndManagerSchema } from "@/schemas/restaurant-manager-schemas";
 import { ResourceAlreadyExistsError } from "@/use-cases/errors/resource-already-exists";
 
-
-export class CreateRestaurantManagerUseCase {
+export class CreateRestaurantAndManagerUseCase {
 	constructor(
 		private usersRepository: UsersRepository,
 		private restaurantsRepository: RestaurantsRepository,
@@ -16,7 +15,7 @@ export class CreateRestaurantManagerUseCase {
 		managerName,
 		phone,
 		restaurantName,
-	}: CreateRestaurantManagerSchema): Promise<User> {
+	}: CreateRestaurantAndManagerSchema): Promise<User> {
 		const doesManagerExists = await this.usersRepository.findByEmail(email);
 		if (doesManagerExists) throw new ResourceAlreadyExistsError();
 

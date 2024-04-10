@@ -1,6 +1,6 @@
 import { auth } from "@/http/plugins/auth";
 import { authenticateFromLink } from "@/http/routes/authenticate-from-link";
-import { createRestaurantManager } from "@/http/routes/create-restaurant-manager";
+import { CreateRestaurantAndManager } from "@/http/routes/create-restaurant-manager";
 import { getManagedRestaurant } from "@/http/routes/get-managed-restaurant";
 import { getOrderDetails } from "@/http/routes/get-order-details";
 import { getProfile } from "@/http/routes/get-profile";
@@ -10,7 +10,7 @@ import Elysia from "elysia";
 
 export const app = new Elysia()
 	.use(auth)
-	.use(createRestaurantManager)
+	.use(CreateRestaurantAndManager)
 	.use(sendAuthLink)
 	.use(authenticateFromLink)
 	.use(getProfile)

@@ -7,7 +7,7 @@ import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memor
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import type { RestaurantsRepository } from "@/repositories/restaurants-repository";
 import type { UsersRepository } from "@/repositories/users-repository";
-import { AuthFromLinkUseCase } from "@/use-cases/auth-from-link-use-case";
+import { AuthFromLinkUseCase } from "@/use-cases/auth-links/auth-from-link-use-case";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 
 let restaurantsRepository: RestaurantsRepository;
