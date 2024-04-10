@@ -10,7 +10,7 @@ describe("Send auth link (e2e)", () => {
 	it.if(env.NODE_ENV === "qa")("should be able to send auth link", async () => {
 		const { token } = await authenticateManager();
 
-		const response = await app["auth-links"].authenticate.post(
+		const response = await app["auth-links"].send.post(
 			{ email: "johndoe@email.com" },
 			{ headers: { Authorization: token } },
 		);

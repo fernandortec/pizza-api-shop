@@ -10,8 +10,11 @@ import type {
 	OrderWithDetails,
 	OrdersRepository,
 } from "@/repositories/orders-repository";
-import type { CreateOrderSchema } from "@/schemas/orders-schemas";
-import { eq } from "drizzle-orm";
+import type {
+	CreateOrderSchema,
+	FindByCustomerAndRestaurantSchema,
+} from "@/schemas/orders-schemas";
+import { and, eq } from "drizzle-orm";
 
 export class DrizzleOrdersRepository implements OrdersRepository {
 	async create({
@@ -20,7 +23,12 @@ export class DrizzleOrdersRepository implements OrdersRepository {
 		status,
 		totalInCents,
 	}: CreateOrderSchema): Promise<Order> {
-		throw new Error("Method not implemented.");
+		const [order] = await db
+			.insert(orders)
+			.values({ restaurantId, totalInCents, customerId, status })
+			.returning();
+
+		return order;
 	}
 	async findById(id: string): Promise<OrderWithDetails> {
 		const [order] = await db
@@ -49,6 +57,23 @@ export class DrizzleOrdersRepository implements OrdersRepository {
 			.leftJoin(orderItems, eq(orders.id, orderItems.orderId))
 			.leftJoin(products, eq(orderItems.productId, products.id))
 			.limit(1);
+
+		return order;
+	}
+
+	async findByCustomerAndRestaurant({
+		restaurantId,
+		customerId,
+	}: FindByCustomerAndRestaurantSchema): Promise<Order | null> {
+		const [order] = await db
+			.select()
+			.from(orders)
+			.where(
+				and(
+					eq(orders.customerId, customerId),
+					eq(orders.restaurantId, restaurantId),
+				),
+			);
 
 		return order;
 	}

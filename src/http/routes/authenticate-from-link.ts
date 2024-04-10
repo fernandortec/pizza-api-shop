@@ -9,21 +9,19 @@ export const authenticateFromLink = new Elysia()
 	.error({ NOT_FOUND: ResourceNotFoundError })
 	.get(
 		"/auth-links/authenticate",
-		async ({ query, set, signUser }) => {
+		async ({ query, set, signUser }): Promise<void> => {
 			const { code, redirect } = query;
 
 			const authLinkUseCase = makeAuthFromLinkUseCase();
 
 			const userData = await authLinkUseCase.execute({ code, redirect });
 
-			const token = await signUser({
+			await signUser({
 				sub: userData.userId,
 				restaurantId: userData?.restaurantId,
 			});
 
 			set.redirect = redirect;
-
-			return token;
 		},
 		{
 			query: authFromLinkSchema,

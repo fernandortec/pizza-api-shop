@@ -1,6 +1,7 @@
 import { env } from "@/env";
+import cookie from "@/helpers/cookie";
 import { type JwtSchema, jwtSchema } from "@/schemas/auth-schemas";
-import cookie from "@elysiajs/cookie";
+
 import { jwt } from "@elysiajs/jwt";
 import { Elysia } from "elysia";
 
@@ -49,7 +50,9 @@ export const auth = new Elysia()
 			},
 
 			getCurrentUser: async (): Promise<GetCurrentUserResponse> => {
-				const payload = await verify(headers.authorization || headers.Authorization);
+				const payload = await verify(
+					headers.authorization || headers.Authorization,
+				);
 
 				return {
 					userId: payload ? payload.sub : null,

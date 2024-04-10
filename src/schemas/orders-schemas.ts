@@ -1,5 +1,13 @@
 import { type Static, t } from "elysia";
 
+export const statusSchema = t.Union([
+	t.Literal("pending"),
+	t.Literal("processing"),
+	t.Literal("delivering"),
+	t.Literal("delivered"),
+	t.Literal("canceled"),
+]);
+
 export const createOrderSchema = t.Object({
 	customerId: t.String(),
 	restaurantId: t.String(),

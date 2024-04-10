@@ -7,7 +7,7 @@ export const getManagedRestaurant = new Elysia()
 	.use(auth)
 	.error({ NOT_FOUND: ResourceNotFoundError })
 	.get(
-		"/restaurants",
+		"/get-restaurant",
 		async ({ getCurrentUser }) => {
 			const { restaurantId } = await getCurrentUser();
 

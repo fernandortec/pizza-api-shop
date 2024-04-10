@@ -9,7 +9,7 @@ describe("Get Managed Restaurant (e2e)", () => {
 	it("should be able to get a managed restaurant", async () => {
 		const { token } = await authenticateManager("withRestaurant");
 
-		const response = await app.restaurants.get({
+		const response = await app["get-restaurant"].get({
 			headers: { Authorization: token },
 		});
 

@@ -1,4 +1,3 @@
-import { auth } from "@/http/plugins/auth";
 import { makeGetOrderDetailsUseCase } from "@/use-cases/_factories/make-get-order-details-use-case";
 import Elysia, { t } from "elysia";
 

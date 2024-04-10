@@ -1,5 +1,6 @@
 import { auth } from "@/http/plugins/auth";
 import { authenticateFromLink } from "@/http/routes/authenticate-from-link";
+import { createOrder } from "@/http/routes/create-order";
 import { CreateRestaurantAndManager } from "@/http/routes/create-restaurant-manager";
 import { getManagedRestaurant } from "@/http/routes/get-managed-restaurant";
 import { getOrderDetails } from "@/http/routes/get-order-details";
@@ -15,6 +16,6 @@ export const app = new Elysia()
 	.use(authenticateFromLink)
 	.use(getProfile)
 	.use(getManagedRestaurant)
-	.use(getOrderDetails);
+	.use(getOrderDetails).use(createOrder)
 
 export type App = typeof app;

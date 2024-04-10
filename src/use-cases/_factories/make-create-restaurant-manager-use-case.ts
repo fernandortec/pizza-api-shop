@@ -6,11 +6,11 @@ export function makeCreateRestaurantAndManagerUseCase() {
 	const usersRepository = new DrizzleUsersRepository();
 	const restaurantsRepository = new DrizzleRestaurantsRepository();
 
-	const CreateRestaurantAndManagerUseCase =
+	const createRestaurantAndManagerUseCase =
 		new CreateRestaurantAndManagerUseCase(
 			usersRepository,
 			restaurantsRepository,
 		);
 
-	return CreateRestaurantAndManagerUseCase;
+	return createRestaurantAndManagerUseCase;
 }

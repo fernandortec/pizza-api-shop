@@ -6,7 +6,7 @@ import { Elysia } from "elysia";
 export const CreateRestaurantAndManager = new Elysia()
 	.error({ ALREADY_EXISTS: ResourceAlreadyExistsError })
 	.post(
-		"/restaurants",
+		"/create-restaurant",
 		async ({ body }) => {
 			const { email, managerName, phone, restaurantName } = body;
 
