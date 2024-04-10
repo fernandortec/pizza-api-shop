@@ -1,0 +1,36 @@
+import { describe, expect, it } from "bun:test";
+import { authenticateManager } from "@/helpers/test/authenticate-manager";
+import { type App, app as httpApp } from "@/http/app";
+import { treaty } from "@elysiajs/eden";
+
+describe("Get order details (e2e)", () => {
+	const app = treaty<App>(httpApp);
+
+	it("should be able to get an order's details", async () => {
+		const { token } = await authenticateManager("withRestaurant");
+
+		const response = await app["get-restaurant"].get({
+			headers: { Authorization: token },
+		});
+
+		const createOrderResponse = await app["create-order"].post(
+			{
+				status: "pending",
+				totalInCents: 1900,
+				restaurantId: String(response?.data?.id),
+			},
+			{ headers: { Authorization: token } },
+		);
+
+		const getOrderResponse = await app
+			.orders({
+				orderId: String(createOrderResponse.data?.id),
+			})
+			.get({ headers: { Authorization: token } });
+
+    expect(getOrderResponse.status).toBe(200)
+    expect(getOrderResponse.data).toEqual(
+					expect.objectContaining({ id: createOrderResponse.data?.id }),
+				);
+	});
+});
