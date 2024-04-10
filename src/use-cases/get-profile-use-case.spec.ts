@@ -10,7 +10,6 @@ let sut: GetProfileUseCase;
 describe("Get profile use case", () => {
 	beforeEach(() => {
 		usersRepository = new InMemoryUsersRepository();
-
 		sut = new GetProfileUseCase(usersRepository);
 	});
 
