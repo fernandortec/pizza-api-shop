@@ -1,4 +1,4 @@
-import { t,type Static } from "elysia";
+import { type Static, t } from "elysia";
 
 export const createOrderSchema = t.Object({
 	customerId: t.String(),
@@ -10,7 +10,16 @@ export const createOrderSchema = t.Object({
 		t.Literal("delivered"),
 		t.Literal("canceled"),
 	]),
-  totalInCents: t.Number()
+	totalInCents: t.Number(),
 });
 
-export type CreateOrderSchema = Static<typeof createOrderSchema>
+export type CreateOrderSchema = Static<typeof createOrderSchema>;
+
+export const findByCustomerAndRestaurantSchema = t.Object({
+	restaurantId: t.String(),
+	customerId: t.String(),
+});
+
+export type FindByCustomerAndRestaurantSchema = Static<
+	typeof findByCustomerAndRestaurantSchema
+>;

@@ -1,7 +1,13 @@
 import { randomUUID } from "node:crypto";
-import type { Order, OrderWCustomer } from "@/database/schemas";
-import type { OrdersRepository } from "@/repositories/orders-repository";
-import type { CreateOrderSchema } from "@/schemas/orders-schemas";
+import type { Order } from "@/database/schemas";
+import type {
+	OrderWithDetails,
+	OrdersRepository,
+} from "@/repositories/orders-repository";
+import type {
+	CreateOrderSchema,
+	FindByCustomerAndRestaurantSchema,
+} from "@/schemas/orders-schemas";
 
 export class InMemoryOrdersRepository implements OrdersRepository {
 	private orders: Order[] = [];
@@ -26,10 +32,34 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 		return order;
 	}
 
-	async findById(id: string): Promise<OrderWCustomer | null> {
+	async findById(id: string): Promise<OrderWithDetails | null> {
 		const order = this.orders.find((order) => order.id === id);
 		if (!order) return null;
 
-    return order
+		const orderWithDetails: OrderWithDetails = {
+			id: order.id,
+			status: order.status,
+			totalInCents: order.totalInCents,
+			createdAt: order.createdAt,
+			customer: null,
+			orderItems: null,
+			product: null,
+		};
+
+		return orderWithDetails;
+	}
+
+	async findByCustomerAndRestaurant({
+		restaurantId,
+		customerId,
+	}: FindByCustomerAndRestaurantSchema): Promise<Order | null> {
+		const order = this.orders.find(
+			(order) =>
+				order.customerId === customerId && order.restaurantId === restaurantId,
+		);
+
+		if (!order) return null;
+
+		return order;
 	}
 }

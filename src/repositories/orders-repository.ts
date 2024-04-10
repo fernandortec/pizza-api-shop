@@ -1,5 +1,8 @@
 import type { Order, OrderItems, Product, User } from "@/database/schemas";
-import type { CreateOrderSchema } from "@/schemas/orders-schemas";
+import type {
+	CreateOrderSchema,
+	FindByCustomerAndRestaurantSchema,
+} from "@/schemas/orders-schemas";
 
 export interface OrderWithDetails
 	extends Pick<Order, "id" | "status" | "totalInCents" | "createdAt"> {
@@ -12,7 +15,7 @@ export interface OrderWithDetails
 		id: OrderItems["id"];
 		priceInCents: OrderItems["priceInCents"];
 		quantity: OrderItems["quantity"];
-	} | null; 
+	} | null;
 	product: {
 		name: Product["name"];
 	} | null;
@@ -25,4 +28,8 @@ export interface OrdersRepository {
 		totalInCents,
 	}: CreateOrderSchema): Promise<Order>;
 	findById(id: string): Promise<OrderWithDetails | null>;
+	findByCustomerAndRestaurant({
+		restaurantId,
+		customerId,
+	}: FindByCustomerAndRestaurantSchema): Promise<Order | null>;
 }
