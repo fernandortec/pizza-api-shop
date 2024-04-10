@@ -1,6 +1,6 @@
 import { orderItems, restaurants, users } from "@/database/schemas";
 import { createId } from "@paralleldrive/cuid2";
-import { type InferSelectModel, relations } from "drizzle-orm";
+import { relations, type InferSelectModel } from "drizzle-orm";
 import { integer, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const orderStatusEnum = pgEnum("order_status", [
