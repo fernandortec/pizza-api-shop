@@ -1,11 +1,11 @@
 import { auth } from "@/http/plugins/auth";
-import { authenticateFromLink } from "@/http/routes/authenticate-from-link";
-import { createOrder } from "@/http/routes/create-order";
-import { CreateRestaurantAndManager } from "@/http/routes/create-restaurant-manager";
-import { getManagedRestaurant } from "@/http/routes/get-managed-restaurant";
-import { getOrderDetails } from "@/http/routes/get-order-details";
-import { getProfile } from "@/http/routes/get-profile";
-import { sendAuthLink } from "@/http/routes/send-auth-link";
+import { authenticateFromLink } from "@/http/routes/auth-links/authenticate-from-link";
+import { createOrder } from "@/http/routes/orders/create-order";
+import { CreateRestaurantAndManager } from "@/http/routes/restaurants/create-restaurant-and-manager";
+import { getManagedRestaurant } from "@/http/routes/restaurants/get-managed-restaurant";
+import { getOrderDetails } from "@/http/routes/orders/get-order-details";
+import { getProfile } from "@/http/routes/users/get-profile";
+import { sendAuthLink } from "@/http/routes/auth-links/send-auth-link";
 
 import Elysia from "elysia";
 
