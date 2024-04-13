@@ -8,8 +8,10 @@ interface AuthenticateManagerResponse {
 	restaurantId: string | null;
 }
 
+type AuthenticateManagerParams = "withRestaurant" | null;
+
 export async function authenticateManager(
-	relationship?: "withRestaurant",
+	relationship: AuthenticateManagerParams = null,
 ): Promise<AuthenticateManagerResponse> {
 	const app = treaty(httpApp);
 	const { code, managerId, restaurantId } =

@@ -7,7 +7,7 @@ describe("Create order (e2e)", () => {
 	const app = treaty<App>(httpApp);
 
 	it("should be able to create an order", async () => {
-		const { token,restaurantId } = await authenticateManager("withRestaurant");
+		const { token, restaurantId } = await authenticateManager('withRestaurant');
 
 		const orderResponse = await app["create-order"].post(
 			{

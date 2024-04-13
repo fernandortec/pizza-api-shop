@@ -1,4 +1,3 @@
-import type { Restaurant } from "@/database/schemas";
 import { DrizzleAuthLinksRepository } from "@/repositories/drizzle/drizzle-auth-links-repository";
 import { DrizzleRestaurantsRepository } from "@/repositories/drizzle/drizzle-restaurants-repository";
 import { DrizzleUsersRepository } from "@/repositories/drizzle/drizzle-users-repository";
@@ -10,8 +9,10 @@ interface CreateAndRetrieveUserResponse {
 	restaurantId: string | null;
 }
 
+type CreateAndRetrieveCodeParams = "withRestaurant" | null;
+
 export async function createAndRetrieveCode(
-	relationship: string | null = null,
+	relationship: CreateAndRetrieveCodeParams = null,
 ): Promise<CreateAndRetrieveUserResponse> {
 	const usersRepository = new DrizzleUsersRepository();
 	const restaurantsRepository = new DrizzleRestaurantsRepository();
@@ -34,16 +35,8 @@ export async function createAndRetrieveCode(
 			name: "Fake Restaurant",
 		});
 
-		return {
-			code,
-			managerId: manager.id,
-			restaurantId: restaurant.id,
-		};
+		return { code, managerId: manager.id, restaurantId: restaurant.id };
 	}
 
-	return {
-		code,
-		managerId: manager.id,
-		restaurantId: null,
-	};
+	return { code, managerId: manager.id, restaurantId: null };
 }

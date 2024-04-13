@@ -7,17 +7,13 @@ describe("Get order details (e2e)", () => {
 	const app = treaty<App>(httpApp);
 
 	it("should be able to get an order's details", async () => {
-		const { token } = await authenticateManager("withRestaurant");
-
-		const response = await app["get-restaurant"].get({
-			headers: { Authorization: token },
-		});
+		const { token,restaurantId } = await authenticateManager('withRestaurant');
 
 		const createOrderResponse = await app["create-order"].post(
 			{
 				status: "pending",
 				totalInCents: 1900,
-				restaurantId: String(response?.data?.id),
+				restaurantId: String(restaurantId),
 			},
 			{ headers: { Authorization: token } },
 		);
@@ -28,9 +24,9 @@ describe("Get order details (e2e)", () => {
 			})
 			.get({ headers: { Authorization: token } });
 
-    expect(getOrderResponse.status).toBe(200)
-    expect(getOrderResponse.data).toEqual(
-					expect.objectContaining({ id: createOrderResponse.data?.id }),
-				);
+		expect(getOrderResponse.status).toBe(200);
+		expect(getOrderResponse.data).toEqual(
+			expect.objectContaining({ id: createOrderResponse.data?.id }),
+		);
 	});
 });
