@@ -12,7 +12,8 @@ export class DrizzleRestaurantsRepository implements RestaurantsRepository {
 	}: CreateRestaurantSchema): Promise<Restaurant> {
 		const [restaurant] = await db
 			.insert(restaurants)
-			.values({ name, description, managerId });
+			.values({ name, description, managerId })
+			.returning();
 
 		return restaurant;
 	}

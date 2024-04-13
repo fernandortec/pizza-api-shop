@@ -7,7 +7,9 @@ import type {
 import type {
 	CreateOrderSchema,
 	FindByCustomerAndRestaurantSchema,
+	UpdateOrderSchema,
 } from "@/schemas/orders-schemas";
+import { ResourceNotFoundError } from "@/use-cases/_errors/resource-not-found-error";
 
 export class InMemoryOrdersRepository implements OrdersRepository {
 	private orders: Order[] = [];
@@ -28,6 +30,23 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 		};
 
 		this.orders.push(order);
+
+		return order;
+	}
+	async update({
+		id,
+		status,
+		totalInCents,
+	}: UpdateOrderSchema): Promise<Order> {
+		const orderIdx = this.orders.findIndex((order) => order.id === id);
+		if (orderIdx !== 0) throw new ResourceNotFoundError();
+
+		const order = this.orders[orderIdx];
+
+		order.status = status ? status : order.status;
+		order.totalInCents = totalInCents ? totalInCents : order.totalInCents;
+
+		this.orders[orderIdx] = order;
 
 		return order;
 	}

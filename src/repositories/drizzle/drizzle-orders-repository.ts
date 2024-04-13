@@ -13,6 +13,7 @@ import type {
 import type {
 	CreateOrderSchema,
 	FindByCustomerAndRestaurantSchema,
+	UpdateOrderSchema,
 } from "@/schemas/orders-schemas";
 import { and, eq } from "drizzle-orm";
 
@@ -30,6 +31,21 @@ export class DrizzleOrdersRepository implements OrdersRepository {
 
 		return order;
 	}
+
+	async update({
+		id,
+		status,
+		totalInCents,
+	}: UpdateOrderSchema): Promise<Order> {
+		const [order] = await db
+			.update(orders)
+			.set({ status, totalInCents })
+			.where(eq(orders.id, id))
+			.returning();
+
+		return order;
+	}
+
 	async findById(id: string): Promise<OrderWithDetails> {
 		const [order] = await db
 			.select({

@@ -1,6 +1,6 @@
 import type { Order } from "@/database/schemas";
 import { auth } from "@/http/plugins/auth";
-import { createOrderSchema, statusSchema } from "@/schemas/orders-schemas";
+import { statusSchema } from "@/schemas/orders-schemas";
 import { OrderCooldownExceededError } from "@/use-cases/_errors/order-cooldown-exceeded-error";
 import { UnauthorizedError } from "@/use-cases/_errors/unauthorized-error";
 import { makeCreateOrderUseCase } from "@/use-cases/_factories/make-create-order";
@@ -11,7 +11,7 @@ export const createOrder = new Elysia()
 	.error({ ORDER_COOLDOWN_EXCEEDED: OrderCooldownExceededError })
 	.post(
 		"/create-order",
-		async ({ body, getCurrentUser, params }): Promise<Order> => {
+		async ({ body, getCurrentUser }): Promise<Order> => {
 			const { userId } = await getCurrentUser();
 
 			if (!userId) throw new UnauthorizedError();
