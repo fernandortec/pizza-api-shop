@@ -8,14 +8,14 @@ describe("Authenticate from link(e2e)", () => {
 	const app = treaty<App>(httpApp);
 
 	it.if(env.NODE_ENV === "qa")("should be able to authenticate from link", async () => {
-		await app.restaurants.post({
+		await app["create-restaurant"].post({
 			email: "email@email.com",
 			managerName: "fake manager",
 			phone: "31993750285",
 			restaurantName: "restaurant",
 		});
 
-		const sentAuthLinkResponse = await app["auth-links"].authenticate.post({
+		const sentAuthLinkResponse = await app["auth-links"].send.post({
 			email: "email@email.com",
 		});
 

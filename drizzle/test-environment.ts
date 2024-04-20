@@ -6,10 +6,10 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 
-if (process.env.IS_TEST_E2E) {
-	if (!process.env.DATABASE_URL) {
-		throw new Error("Please provide a DATABASE_URL environment variable.");
-	}
+async function updateDatabaseURLWithSchema(): Promise<void> {
+	if (!process.env.IS_E2E) return;
+	if (!process.env.DATABASE_URL)
+		throw new Error("Please provide a DATABASE_URL envirnoment variable");
 
 	const schema = randomUUID();
 	const databaseURL = new URL(String(process.env.DATABASE_URL));
@@ -35,3 +35,5 @@ if (process.env.IS_TEST_E2E) {
 		await db.execute(sql.raw(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`));
 	});
 }
+
+await updateDatabaseURLWithSchema();

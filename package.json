@@ -7,33 +7,36 @@
     "build": "bun build src/http/server.ts",
     "start": "bun src/http/server.ts",
     "test": "bun test ./src/use-cases/**/*.spec.ts",
-    "test:e2e": "IS_TEST_E2E=yes bun test --timeout 10000 ./src/http/*/**/*.spec.ts",
+    "test:e2e": "IS_E2E=yes bun test --timeout 10000 ./src/http/*/**/*.spec.ts",
     "generate": "drizzle-kit generate:pg",
     "studio": "drizzle-kit studio",
     "migrate": "bun src/database/migrate.ts",
     "seed": "bun src/database/seed.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.6.4",
+    "@biomejs/biome": "^1.7.0",
     "@faker-js/faker": "^8.4.1",
     "@types/bun": "latest",
+    "@types/cookie": "^0.6.0",
+    "@types/cookie-signature": "^1.1.2",
     "@types/nodemailer": "^6.4.14",
     "chalk": "^5.3.0",
     "cheerio": "^1.0.0-rc.12",
-    "drizzle-kit": "^0.20.14",
-    "pg": "^8.11.3",
-    "typescript": "^5.3.3"
+    "drizzle-kit": "^0.20.16",
+    "pg": "^8.11.5",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@elysiajs/eden": "^1.0.8",
+    "@elysiajs/eden": "^1.0.11",
     "@elysiajs/jwt": "^1.0.2",
     "@paralleldrive/cuid2": "^2.2.2",
+    "cookie": "^0.6.0",
+    "cookie-signature": "^1.2.1",
     "dayjs": "^1.11.10",
     "drizzle-orm": "latest",
-    "elysia": "^1.0.10",
-    "nodemailer": "^6.9.12",
-    "postgres": "^3.4.3",
-    "zod": "^3.22.4"
+    "elysia": "^1.0.13",
+    "nodemailer": "^6.9.13",
+    "postgres": "^3.4.4"
   },
   "config": {
     "commitizen": {
