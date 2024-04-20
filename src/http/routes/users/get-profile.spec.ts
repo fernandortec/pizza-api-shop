@@ -4,7 +4,7 @@ import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
 describe("Get profile (e2e)", () => {
-	const app = treaty<App>(httpApp);
+	const app = treaty(httpApp);
 
 	it("should be able to get profile", async () => {
 		const { token } = await authenticateManager();

@@ -4,10 +4,10 @@ import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
 describe("Create order (e2e)", () => {
-	const app = treaty<App>(httpApp);
+	const app = treaty(httpApp);
 
 	it("should be able to approve an order", async () => {
-		const { token, restaurantId } = await authenticateManager('withRestaurant');
+		const { token, restaurantId } = await authenticateManager("withRestaurant");
 
 		const order = await app["create-order"].post(
 			{

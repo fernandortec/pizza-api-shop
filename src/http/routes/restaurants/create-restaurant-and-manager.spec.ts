@@ -3,7 +3,7 @@ import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
 describe("Create Restaurant Manager (e2e)", () => {
-	const app = treaty<App>(httpApp);
+	const app = treaty(httpApp);
 
 	it("should be able to create a restaurant manager", async () => {
 		const managerResponse = await app["create-restaurant"].post({

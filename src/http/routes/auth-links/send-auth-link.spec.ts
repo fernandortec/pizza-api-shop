@@ -5,7 +5,7 @@ import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
 describe("Send auth link (e2e)", () => {
-	const app = treaty<App>(httpApp);
+	const app = treaty(httpApp);
 
 	it.if(env.NODE_ENV === "qa")("should be able to send auth link", async () => {
 		const { token } = await authenticateManager();

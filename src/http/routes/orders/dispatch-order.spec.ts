@@ -3,24 +3,30 @@ import { authenticateManager } from "@/helpers/test/authenticate-manager";
 import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
-describe("Create order (e2e)", () => {
+describe("Dispatch order (e2e)", () => {
 	const app = treaty(httpApp);
 
-	it("should be able to create an order", async () => {
+	it("should be able to approve an order", async () => {
 		const { token, restaurantId } = await authenticateManager("withRestaurant");
 
-		const orderResponse = await app["create-order"].post(
+		const order = await app["create-order"].post(
 			{
-				status: "pending",
+				status: "processing",
 				totalInCents: 1900,
 				restaurantId: String(restaurantId),
 			},
 			{ headers: { Authorization: token } },
 		);
 
-		expect(orderResponse.status).toBe(200);
-		expect(orderResponse.data).toEqual(
-			expect.objectContaining({ id: expect.any(String) }),
+		const response = await app["dispatch-order"]({
+			orderId: order.data!.id,
+		}).patch({}, { headers: { Authorization: token } });
+
+		expect(response.status).toBe(200);
+		expect(response.data).toEqual(
+			expect.objectContaining({
+				status: "delivering",
+			}),
 		);
 	});
 });

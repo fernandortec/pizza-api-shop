@@ -14,7 +14,7 @@ export class DispatchOrderUseCase {
 
 		const dispatchedOrder = await this.ordersRepository.update({
 			id: order.id,
-			status: "delivered",
+			status: "delivering",
 		});
 
 		return dispatchedOrder;

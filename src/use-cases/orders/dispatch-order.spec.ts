@@ -26,7 +26,7 @@ describe("Dispatch order use case", () => {
 		const dispatched = await sut.execute(order.id);
 
 		expect(dispatched).toEqual(
-			expect.objectContaining({ id: order.id, status: "delivered" }),
+			expect.objectContaining({ id: order.id, status: "delivering" }),
 		);
 	});
 
