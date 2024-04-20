@@ -3,7 +3,7 @@ import { authenticateManager } from "@/helpers/test/authenticate-manager";
 import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
-describe("Create order (e2e)", () => {
+describe("Approve order (e2e)", () => {
 	const app = treaty(httpApp);
 
 	it("should be able to approve an order", async () => {

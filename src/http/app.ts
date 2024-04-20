@@ -10,6 +10,7 @@ import { sendAuthLink } from "@/http/routes/auth-links/send-auth-link";
 import Elysia from "elysia";
 import { approveOrder } from "@/http/routes/orders/approve-order";
 import { dispatchOrder } from "@/http/routes/orders/dispatch-order";
+import { cancelOrder } from "@/http/routes/orders/cancel-order";
 
 export const app = new Elysia()
 	.use(auth)
@@ -21,6 +22,7 @@ export const app = new Elysia()
 	.use(getOrderDetails)
 	.use(createOrder)
 	.use(approveOrder)
-	.use(dispatchOrder);
+	.use(dispatchOrder)
+	.use(cancelOrder);
 
 export type App = typeof app;

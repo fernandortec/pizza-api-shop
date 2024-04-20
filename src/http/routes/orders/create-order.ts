@@ -3,7 +3,7 @@ import { auth } from "@/http/plugins/auth";
 import { statusSchema } from "@/schemas/orders-schemas";
 import { OrderCooldownExceededError } from "@/use-cases/_errors/order-cooldown-exceeded-error";
 import { UnauthorizedError } from "@/use-cases/_errors/unauthorized-error";
-import { makeCreateOrderUseCase } from "@/use-cases/_factories/make-create-order";
+import { makeCreateOrderUseCase } from "@/use-cases/_factories/make-create-order-use-case";
 import Elysia, { t } from "elysia";
 
 export const createOrder = new Elysia()

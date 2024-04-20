@@ -3,10 +3,10 @@ import { authenticateManager } from "@/helpers/test/authenticate-manager";
 import { type App, app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
 
-describe("Dispatch order (e2e)", () => {
+describe("Cancel order (e2e)", () => {
 	const app = treaty(httpApp);
 
-	it("should be able to dispatch an order", async () => {
+	it("should be able to cancel an order", async () => {
 		const { token, restaurantId } = await authenticateManager("withRestaurant");
 
 		const order = await app["create-order"].post(
@@ -18,14 +18,14 @@ describe("Dispatch order (e2e)", () => {
 			{ headers: { Authorization: token } },
 		);
 
-		const response = await app["dispatch-order"]({
+		const response = await app["cancel-order"]({
 			orderId: order.data!.id,
 		}).patch({}, { headers: { Authorization: token } });
 
 		expect(response.status).toBe(200);
 		expect(response.data).toEqual(
 			expect.objectContaining({
-				status: "delivering",
+				status: "canceled",
 			}),
 		);
 	});
