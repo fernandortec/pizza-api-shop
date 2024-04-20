@@ -1,7 +1,7 @@
-import { describe, expect, it } from "bun:test";
 import { authenticateManager } from "@/helpers/test/authenticate-manager";
-import { type App, app as httpApp } from "@/http/app";
+import { app as httpApp } from "@/http/app";
 import { treaty } from "@elysiajs/eden";
+import { describe, expect, it } from "bun:test";
 
 describe("Cancel order (e2e)", () => {
 	const app = treaty(httpApp);

@@ -11,6 +11,7 @@ import Elysia from "elysia";
 import { approveOrder } from "@/http/routes/orders/approve-order";
 import { dispatchOrder } from "@/http/routes/orders/dispatch-order";
 import { cancelOrder } from "@/http/routes/orders/cancel-order";
+import { deliverOrder } from "@/http/routes/orders/deliver-order";
 
 export const app = new Elysia()
 	.use(auth)
@@ -23,6 +24,7 @@ export const app = new Elysia()
 	.use(createOrder)
 	.use(approveOrder)
 	.use(dispatchOrder)
-	.use(cancelOrder);
+	.use(cancelOrder)
+	.use(deliverOrder);
 
 export type App = typeof app;
